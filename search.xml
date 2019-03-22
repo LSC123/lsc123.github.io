@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F03%2F22%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick Start Create a new post$ hexo new "My New Post" More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment #include"stdio.h" int main(void) { printf("hello Linux模拟windows（SAMBA服务），与windows通讯\n"); return 0; }]]></content>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.文章置顶打开文章添加top字段,设置数值，数值越大文章越靠前 Quick Start Create a new post$ hexo new "My New Post" More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment #include"stdio.h" int main(void) { printf("hello Linux模拟windows（SAMBA服务），与windows通讯\n"); return 0; }]]></content>
   </entry>
   <entry>
     <title><![CDATA[嵌入式Linux开发笔记 Linux环境搭建]]></title>
