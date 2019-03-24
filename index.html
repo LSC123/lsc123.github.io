@@ -480,7 +480,7 @@
                 
               
 
-              <time title="创建时间：2019-03-24 21:05:23 / 修改时间：23:12:31" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
+              <time title="创建时间：2019-03-24 21:05:23 / 修改时间：23:19:57" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
             
 
             
@@ -533,7 +533,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.7k</span>
+                <span title="本文字数">1.6k</span>
               
 
               
@@ -547,7 +547,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -582,44 +582,35 @@
 <li>并行：并行是指两个或者多个事件在同一时刻发生</li>
 </ul>
 <h3 id="1-3进程控制块-PCB"><a href="#1-3进程控制块-PCB" class="headerlink" title="1.3进程控制块(PCB)"></a>1.3进程控制块(PCB)</h3><p>每一个进程在内核里都有一个进程控制块来维护进程相关的信息。Linux内核的进程控制块是task_struct结构体，在/usr/src/linux-header-3.16/include/linux/sched.h文件里可以查看struct task_struct结构体的定义，其内部成员有很多，重点掌握以下内容</p>
-<pre><code>- 进程ID： 系统中每个进程都有唯一的ID，在C语言中用pid_t类型表示，其实就是一个非负整数。pid_t是用typedef对某个数据类型做了重定义，后面的_t是就是typedef的意思
-- 进程的状态：有就绪，允许，运行，挂起，停止等状态
-- 进程切换时需要保存和恢复的一些CPU寄存器
-- 描述虚拟地址空间的信息
-    在Linux下，每启动一个虚拟进程就对应一个虚拟地址空间，包含应用程序的所有信息，但是里面数据的实际计算是在物理内存里(cpu里的MMU会做一个虚拟内存到物理内存之间的映射)
-- 描述控制终端的信息
-    ./a.out执行起来就变成一个进程，进程在运行时，依赖于终端，因为需要把数据输出到对应的终端上，所以进程会保存一些控制终端的信息
-- 当前工作目录（Current Working Directory）
-    当前进程是在哪个工作目录下工作的
-    ```bash
-    pwd
-    ```
-    在Linux下执行pwd,输出当前工作目录，是因为当前工作目录保存在地址空间中
-- umask掩码
-   在每一个进程下都有umask掩码
-    ```bash
-    umask
-    umask 222
-    umask
-    ```
-    使用umask命令查看掩码，使用umask 222 改变进程掩码，在使用umask查看掩码，发现掩码改变为我们过设定的值。当再开启一个进程时，掩码为此进程下的掩码，与刚开始的进程下的修改的掩码不同，每一个进程之间是互不影响的
-- 文件描述符表，包含很多指向file结构体的指针
-    文件描述符表在pcb里，其实可以看成一个大小为1024数组，对于任何一个进程来说，默认能打开的最多文件个数为1024个，把内核改一下，重新编译一下内核，就可以改变能打开的最多文件个数，不过不建议轻易改动内核，除非特殊需要
-- 和信号相关的信息
-    Linux下独有的
-- 用户ID和组ID
-    ```bash
-     stat test.c
-    ```
-    输入stat加文件名，查看文件状态uid和Gid后的就是用户ID和组ID
-- 会话（Session）和进程组
-    多个进程放在一起就是一个进程组，多个进程组组成的就是会话
-- 进程可以使用的资源上限（Resource Limit）    
-    ```bash
-    ulimit -a
-    ```
-    输入 ulimit -a命令，可以看到进程里的资源，例如默认能打开的文件个数，管道里的缓存区，栈的默认缓存区大小，都在资源上限里看到，这些数据都是存在进程控制块里，
-</code></pre><h3 id="1-4进程的五种状态"><a href="#1-4进程的五种状态" class="headerlink" title="1.4进程的五种状态"></a>1.4进程的五种状态</h3><ul>
+<ul>
+<li>进程ID： 系统中每个进程都有唯一的ID，在C语言中用pid_t类型表示，其实就是一个非负整数。pid_t是用typedef对某个数据类型做了重定义，后面的_t是就是typedef的意思</li>
+<li>进程的状态：有就绪，允许，运行，挂起，停止等状态<ul>
+<li>进程切换时需要保存和恢复的一些CPU寄存器</li>
+<li>描述虚拟地址空间的信息<pre><code>在Linux下，每启动一个虚拟进程就对应一个虚拟地址空间，包含应用程序的所有信息，但是里面数据的实际计算是在物理内存里(cpu里的MMU会做一个虚拟内存到物理内存之间的映射)
+</code></pre></li>
+<li>描述控制终端的信息<pre><code>./a.out执行起来就变成一个进程，进程在运行时，依赖于终端，因为需要把数据输出到对应的终端上，所以进程会保存一些控制终端的信息
+</code></pre></li>
+<li>当前工作目录（Current Working Directory）<br>当前进程是在哪个工作目录下工作的<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">pwd</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+在Linux下执行pwd,输出当前工作目录，是因为当前工作目录保存在地址空间中</li>
+<li>umask掩码<br>在每一个进程下都有umask掩码<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">umask</span>
+<span class="token function">umask</span> 222
+<span class="token function">umask</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+使用umask命令查看掩码，使用umask 222 改变进程掩码，在使用umask查看掩码，发现掩码改变为我们过设定的值。当再开启一个进程时，掩码为此进程下的掩码，与刚开始的进程下的修改的掩码不同，每一个进程之间是互不影响的</li>
+<li>文件描述符表，包含很多指向file结构体的指针<br> 文件描述符表在pcb里，其实可以看成一个大小为1024数组，对于任何一个进程来说，默认能打开的最多文件个数为1024个，把内核改一下，重新编译一下内核，就可以改变能打开的最多文件个数，不过不建议轻易改动内核，除非特殊需要</li>
+<li>和信号相关的信息<br> Linux下独有的</li>
+<li>用户ID和组ID<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">stat</span> test.c
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+输入stat加文件名，查看文件状态uid和Gid后的就是用户ID和组ID</li>
+<li>会话（Session）和进程组<br> 多个进程放在一起就是一个进程组，多个进程组组成的就是会话</li>
+<li>进程可以使用的资源上限（Resource Limit）    <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ulimit</span> -a
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+输入 ulimit -a命令，可以看到进程里的资源，例如默认能打开的文件个数，管道里的缓存区，栈的默认缓存区大小，都在资源上限里看到，这些数据都是存在进程控制块里，</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4进程的五种状态"><a href="#1-4进程的五种状态" class="headerlink" title="1.4进程的五种状态"></a>1.4进程的五种状态</h3><ul>
 <li>就绪态<br>  在终端下执行./a.out后，进程有了，它所对应的地址空间也有了，所处的状态为就绪态，有执行资格，没有执行权，多个进程分用cpu的时间碎片，在没有分到时间碎片时，处于就绪态</li>
 <li>运行态<br>  当抢到时间碎片后，处于运行态，所有的运行态都是从就绪态而来</li>
 <li>挂起态<br>  没有执行资格，没有执行权（例如运行sleep()函数后）<br><img src="../../images/jincheng.png" alt="进程的五种状态"></li>
