@@ -173,13 +173,13 @@
 <meta property="og:site_name" content="LSC&#39;s_blog">
 <meta property="og:description" content="1. 进程相关概念">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://lsc123.github.io/2019/03/images/jincheng.png">
-<meta property="og:image" content="https://lsc123.github.io/2019/03/images/fork.png">
-<meta property="og:updated_time" content="2019-03-24T15:29:00.499Z">
+<meta property="og:image" content="https://lsc123.github.io/2019/03/24/next/source/images/jincheng.png">
+<meta property="og:image" content="https://lsc123.github.io/2019/03/24/next/source/images/fork.png">
+<meta property="og:updated_time" content="2019-03-24T15:33:38.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式Linux开发笔记 &lt;三&gt;  Linux进程">
 <meta name="twitter:description" content="1. 进程相关概念">
-<meta name="twitter:image" content="https://lsc123.github.io/2019/03/images/jincheng.png">
+<meta name="twitter:image" content="https://lsc123.github.io/2019/03/24/next/source/images/jincheng.png">
 
 
 
@@ -481,7 +481,7 @@
                 
               
 
-              <time title="创建时间：2019-03-24 21:05:23 / 修改时间：23:29:00" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
+              <time title="创建时间：2019-03-24 21:05:23 / 修改时间：23:33:38" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
             
 
             
@@ -614,10 +614,12 @@
 <h3 id="1-4进程的五种状态"><a href="#1-4进程的五种状态" class="headerlink" title="1.4进程的五种状态"></a>1.4进程的五种状态</h3><ul>
 <li>就绪态<br>  在终端下执行./a.out后，进程有了，它所对应的地址空间也有了，所处的状态为就绪态，有执行资格，没有执行权，多个进程分用cpu的时间碎片，在没有分到时间碎片时，处于就绪态</li>
 <li>运行态<br>  当抢到时间碎片后，处于运行态，所有的运行态都是从就绪态而来</li>
-<li>挂起态<br>  没有执行资格，没有执行权（例如运行sleep()函数后）<br><img src="../../images/jincheng.png" alt="进程的五种状态"></li>
+<li>挂起态<br>  没有执行资格，没有执行权（例如运行sleep()函数后）</li>
 </ul>
+<p><img src="../next/source/images/jincheng.png" alt="进程的五种状态"></p>
 <h2 id="2-进程控制"><a href="#2-进程控制" class="headerlink" title="2. 进程控制"></a>2. 进程控制</h2><pre><code>进程控制是讲如何创建子进程
-</code></pre><h3 id="fork函数"><a href="#fork函数" class="headerlink" title="fork函数"></a>fork函数</h3><p><img src="../../images/fork.png" alt="fork函数解析"><br>    fork函数创建子进程，子进程相当于父进程的拷贝，用户区数据一样，进程ID不同</p>
+</code></pre><h3 id="fork函数"><a href="#fork函数" class="headerlink" title="fork函数"></a>fork函数</h3><p><img src="../next/source/images/fork.png" alt="fork函数解析"></p>
+<p>fork函数创建子进程，子进程相当于父进程的拷贝，用户区数据一样，进程ID不同</p>
 <ul>
 <li>fork函数有两个返回值<ul>
 <li>父进程返回子进程的PID</li>
@@ -657,7 +659,7 @@
   <p><span>本文标题:</span><a href="/2019/03/24/Linux-3/">嵌入式Linux开发笔记 <三>  Linux进程</三></a></p>
   <p><span>文章作者:</span><a href="/" title="访问 半盏清酒 的个人博客">半盏清酒</a></p>
   <p><span>发布时间:</span>2019年03月24日 - 21:05</p>
-  <p><span>最后更新:</span>2019年03月24日 - 23:29</p>
+  <p><span>最后更新:</span>2019年03月24日 - 23:33</p>
   <p><span>原始链接:</span><a href="/2019/03/24/Linux-3/" title="嵌入式Linux开发笔记 <三>  Linux进程">https://lsc123.github.io/2019/03/24/Linux-3/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://lsc123.github.io/2019/03/24/Linux-3/" aria-label="复制成功！"></i></span>
   </p>
