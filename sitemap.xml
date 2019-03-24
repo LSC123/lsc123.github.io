@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lsc123.github.io/2019/03/22/hello-world/</loc>
+    <loc>https://lsc123.github.io/2019/03/24/Linux-3/</loc>
     
-    <lastmod>2019-03-22T18:08:34.363Z</lastmod>
+    <lastmod>2019-03-24T15:07:04.065Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://lsc123.github.io/2019/03/19/post-title/</loc>
     
-    <lastmod>2019-03-22T17:16:19.348Z</lastmod>
+    <lastmod>2019-03-24T13:06:37.267Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://lsc123.github.io/2019/03/22/hello-world/</loc>
+    
+    <lastmod>2019-03-22T18:08:34.363Z</lastmod>
     
   </url>
   
@@ -37,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://lsc123.github.io/gallery/index.html</loc>
+    <loc>https://lsc123.github.io/categories/index.html</loc>
     
     <lastmod>2019-03-17T05:28:17.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://lsc123.github.io/categories/index.html</loc>
+    <loc>https://lsc123.github.io/gallery/index.html</loc>
     
     <lastmod>2019-03-17T05:28:17.000Z</lastmod>
     
