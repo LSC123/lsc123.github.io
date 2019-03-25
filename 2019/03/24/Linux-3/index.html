@@ -176,7 +176,7 @@
 <meta property="og:image" content="https://lsc123.github.io/my_picture/Linux_picture/jincheng.png">
 <meta property="og:image" content="https://lsc123.github.io/my_picture/Linux_picture/fork.png">
 <meta property="og:image" content="https://lsc123.github.io/my_picture/Linux_picture/exec.png">
-<meta property="og:updated_time" content="2019-03-25T15:52:54.951Z">
+<meta property="og:updated_time" content="2019-03-25T15:58:26.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式Linux开发笔记 &lt;三&gt;  Linux进程">
 <meta name="twitter:description" content="1. 进程相关概念">
@@ -499,7 +499,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-25 23:52:54" itemprop="dateModified" datetime="2019-03-25T23:52:54+08:00">2019-03-25</time>
+                <time title="修改时间：2019-03-25 23:58:26" itemprop="dateModified" datetime="2019-03-25T23:58:26+08:00">2019-03-25</time>
               
             
           </span>
@@ -833,13 +833,15 @@ i<span class="token operator">=</span>3
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-3执行PATH环境变量能够搜索到的程序"><a href="#3-3执行PATH环境变量能够搜索到的程序" class="headerlink" title="3.3执行PATH环境变量能够搜索到的程序"></a>3.3执行PATH环境变量能够搜索到的程序</h3><pre><code>int execlp(const char *file, const char *arg, ...);
+<h3 id="3-3执行PATH环境变量能够搜索到的程序"><a href="#3-3执行PATH环境变量能够搜索到的程序" class="headerlink" title="3.3执行PATH环境变量能够搜索到的程序"></a>3.3执行PATH环境变量能够搜索到的程序</h3><p><strong><em>execlp函数执行系统自带的程序，/bin目录下的文件</em></strong><br><strong><em>execlp执行自定义的程序: file参数绝对路径</em></strong></p>
+<pre><code>int execlp(const char *file, const char *arg, ...);
         § file: 执行的命令的名字
         § 第一arg:占位
         § 后边的arg: 命令的参数
         § 参数写完之后: NULL
-</code></pre><p><strong><em>execlp函数执行系统自带的程序，/bin目录下的文件</em></strong><br><strong><em>execlp执行自定义的程序: file参数绝对路径</em></strong></p>
-<pre><code>int execvp(const char *file, char *const argv[]);
+
+
+int execvp(const char *file, char *const argv[]);
         § 参数:
 </code></pre><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
@@ -877,66 +879,106 @@ i<span class="token operator">=</span>3
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="3-4执行指定路径-指定环境变量下的程序-–-了解即可"><a href="#3-4执行指定路径-指定环境变量下的程序-–-了解即可" class="headerlink" title="3.4执行指定路径, 指定环境变量下的程序 – (了解即可)"></a>3.4执行指定路径, 指定环境变量下的程序 – (了解即可)</h3><p>int execle(const char <em>path, const char </em>arg, …, char <em>const envp[]);<br>            § path: 执行的程序的绝对路径  /home/itcast/a.out<br>            § arg: 执行的的程序的参数<br>            § envp: 用户自己指定的搜索目录, 替代PATH<br>                □ char</em> env[] = {“/home/itcast”, “/bin”, NULL};<br>int execve(const char <em>path, char </em>const argv[], char *const envp[]);</p>
-<h2 id="4-进程回收"><a href="#4-进程回收" class="headerlink" title="4.进程回收"></a>4.进程回收</h2><h3 id="4-1-孤儿进程"><a href="#4-1-孤儿进程" class="headerlink" title="4.1 孤儿进程"></a>4.1 孤儿进程</h3><ul>
+<h3 id="3-4执行指定路径-指定环境变量下的程序-–-了解即可"><a href="#3-4执行指定路径-指定环境变量下的程序-–-了解即可" class="headerlink" title="3.4执行指定路径, 指定环境变量下的程序 – (了解即可)"></a>3.4执行指定路径, 指定环境变量下的程序 – (了解即可)</h3><pre><code>int execle(const char *path, const char *arg, ..., char *const envp[]);
+        § path: 执行的程序的绝对路径  /home/itcast/a.out
+        § arg: 执行的的程序的参数
+        § envp: 用户自己指定的搜索目录, 替代PATH
+            □ char* env[] = {&quot;/home/itcast&quot;, &quot;/bin&quot;, NULL};
+
+int execve(const char *path, char *const argv[], char *const envp[]);
+</code></pre><h2 id="4-进程回收"><a href="#4-进程回收" class="headerlink" title="4.进程回收"></a>4.进程回收</h2><h3 id="4-1-孤儿进程"><a href="#4-1-孤儿进程" class="headerlink" title="4.1 孤儿进程"></a>4.1 孤儿进程</h3><ul>
 <li>父进程挂掉，子进程还存在，则此进程叫做孤儿进程</li>
 <li>孤儿进程会被init进程（ubunt14.04版本以后为/sbin/upstart路径下,即ui进程）领养，init进程变为孤儿进程的父进程</li>
 <li>为了释放子进程占用的系统资源<ul>
 <li>子进程结束之后，能够释放用户区空间</li>
-<li>释放不了pcb，必须由父进程释放，此时init进程起到了作用<br><code>`</code>c<br>#include &lt;stdio.h&gt;<br>#include &lt;unistd.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;sys/types.h&gt;<br>#include &lt;sys/stat.h&gt;<br>#include &lt;string.h&gt;</li>
+<li>释放不了pcb，必须由父进程释放，此时init进程起到了作用</li>
 </ul>
 </li>
 </ul>
-<p>int main(int argc, const char* argv[])<br>{<br>    pid_t pid = fork();<br>    if(pid == -1)<br>    {<br>        perror(“fork error”);<br>        exit(1);<br>    }</p>
-<pre><code>//　子进程执行程序
-if(pid == 0)
-{
-    sleep(1);
-    printf(&quot;child process, pid = %d, ppid = %d\n&quot;, getpid(), getppid());
-}
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
 
-else if(pid&gt;0)
-{
-    printf(&quot;==================parent\n&quot;);
-    printf(&quot;parent process, pid = %d, ppid = %d\n&quot;, getpid(), getppid());
-}
-return 0;
-</code></pre><p>}</p>
-<pre><code>```bash
-gcc guer.c
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    pid_t pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"fork error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//　子进程执行程序</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"child process, pid = %d, ppid = %d\n"</span><span class="token punctuation">,</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getppid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>pid<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"==================parent\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"parent process, pid = %d, ppid = %d\n"</span><span class="token punctuation">,</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getppid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">gcc guer.c
 ./a.out （执行孤儿进程）
-ps aux | grep 1492 (1492为父进程pid)
-kill -9 1492
-</code></pre><p>输入kill -9 1492命令，则杀死父进程（init进程），系统重新回到桌面</p>
+<span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> 1492 <span class="token punctuation">(</span>1492为父进程pid<span class="token punctuation">)</span>
+<span class="token function">kill</span> -9 1492
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输入kill -9 1492命令，则杀死父进程（init进程），系统重新回到桌面</p>
 <h3 id="4-2-僵尸进程"><a href="#4-2-僵尸进程" class="headerlink" title="4.2 僵尸进程"></a>4.2 僵尸进程</h3><ul>
 <li>父进程存在，子进程挂掉，父进程不去释放子进程的pcb，此时的子进程变为了僵尸进程</li>
 <li>僵尸进程是一个已经挂掉的程序</li>
-<li>杀死僵尸进程需要杀死它的父进程<br><code>`</code>c<br>#include &lt;stdio.h&gt;<br>#include &lt;unistd.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;sys/types.h&gt;<br>#include &lt;sys/stat.h&gt;<br>#include &lt;string.h&gt;</li>
+<li>杀死僵尸进程需要杀死它的父进程</li>
 </ul>
-<p>int main(int argc, const char* argv[])<br>{<br>    pid_t pid = fork();<br>    if(pid == -1)<br>    {<br>        perror(“fork error”);<br>        exit(1);<br>    }</p>
-<pre><code>//　子进程执行程序
-if(pid == 0)
-{
-    printf(&quot;child process, pid = %d, ppid = %d\n&quot;, getpid(), getppid());
-}
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
 
-else if(pid&gt;0)
-{
-    while（1）
-    {
-        sleep(1);
-        printf(&quot;==================parent\n&quot;);
-        printf(&quot;parent process, pid = %d, ppid = %d\n&quot;, getpid(), getppid());
-    }      
-}
-return 0;
-</code></pre><p>}</p>
-<pre><code>```bash
-gcc jiangshi.c
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    pid_t pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"fork error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//　子进程执行程序</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"child process, pid = %d, ppid = %d\n"</span><span class="token punctuation">,</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getppid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>pid<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">while</span>（<span class="token number">1</span>）
+        <span class="token punctuation">{</span>
+            <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"==================parent\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"parent process, pid = %d, ppid = %d\n"</span><span class="token punctuation">,</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getppid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>      
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">gcc jiangshi.c
 ./a.out （执行僵尸进程）
-ps aux
-kill -9 40763（子进程pid）
-</code></pre><ul>
+<span class="token function">ps</span> aux
+<span class="token function">kill</span> -9 40763（子进程pid）
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
 <li>输入ps aux命令查看僵尸进程。Z+为僵尸英文首字母的意思，<defuct>为已经死亡的意思）</defuct></li>
 <li>杀死僵尸进程，必须杀死其父进程，杀死父进程下后，僵尸进程被init进程收养，然后被init进程释放</li>
 </ul>
@@ -977,7 +1019,7 @@ kill -9 40763（子进程pid）
   <p><span>本文标题:</span><a href="/2019/03/24/Linux-3/">嵌入式Linux开发笔记 <三>  Linux进程</三></a></p>
   <p><span>文章作者:</span><a href="/" title="访问 半盏清酒 的个人博客">半盏清酒</a></p>
   <p><span>发布时间:</span>2019年03月24日 - 21:05</p>
-  <p><span>最后更新:</span>2019年03月25日 - 23:52</p>
+  <p><span>最后更新:</span>2019年03月25日 - 23:58</p>
   <p><span>原始链接:</span><a href="/2019/03/24/Linux-3/" title="嵌入式Linux开发笔记 <三>  Linux进程">https://lsc123.github.io/2019/03/24/Linux-3/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://lsc123.github.io/2019/03/24/Linux-3/" aria-label="复制成功！"></i></span>
   </p>
