@@ -173,13 +173,13 @@
 <meta property="og:site_name" content="LSC&#39;s_blog">
 <meta property="og:description" content="1. 进程相关概念">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://lsc123.github.io/2019/03/source/images/jincheng.png">
-<meta property="og:image" content="https://lsc123.github.io/2019/03/source/images/fork.png">
-<meta property="og:updated_time" content="2019-03-24T15:36:01.617Z">
+<meta property="og:image" content="https://lsc123.github.io/2019/03/images/jincheng.png">
+<meta property="og:image" content="https://lsc123.github.io/2019/03/images/fork.png">
+<meta property="og:updated_time" content="2019-03-25T03:29:04.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式Linux开发笔记 &lt;三&gt;  Linux进程">
 <meta name="twitter:description" content="1. 进程相关概念">
-<meta name="twitter:image" content="https://lsc123.github.io/2019/03/source/images/jincheng.png">
+<meta name="twitter:image" content="https://lsc123.github.io/2019/03/images/jincheng.png">
 
 
 
@@ -481,12 +481,24 @@
                 
               
 
-              <time title="创建时间：2019-03-24 21:05:23 / 修改时间：23:36:01" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
+              <time title="创建时间：2019-03-24 21:05:23" itemprop="dateCreated datePublished" datetime="2019-03-24T21:05:23+08:00">2019-03-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-25 11:29:04" itemprop="dateModified" datetime="2019-03-25T11:29:04+08:00">2019-03-25</time>
               
             
           </span>
@@ -534,7 +546,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">3.1k</span>
               
 
               
@@ -548,7 +560,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -581,17 +593,17 @@
 <li>并发：并发并不是一个时间点，而是一个时间段内的概念</li>
 <li>并行：并行是指两个或者多个事件在同一时刻发生</li>
 </ul>
-<h3 id="1-3进程控制块-PCB"><a href="#1-3进程控制块-PCB" class="headerlink" title="1.3进程控制块(PCB)"></a>1.3进程控制块(PCB)</h3><p>每一个进程在内核里都有一个进程控制块来维护进程相关的信息。Linux内核的进程控制块是task_struct结构体，在/usr/src/linux-header-3.16/include/linux/sched.h文件里可以查看struct task_struct结构体的定义，其内部成员有很多，重点掌握以下内容</p>
+<h3 id="1-3进程控制块-PCB"><a href="#1-3进程控制块-PCB" class="headerlink" title="1.3进程控制块(PCB)"></a>1.3进程控制块(PCB)</h3><p>　　每一个进程在内核里都有一个进程控制块来维护进程相关的信息。Linux内核的进程控制块是task_struct结构体，在/usr/src/linux-header-3.16/include/linux/sched.h文件里可以查看struct　task_struct结构体的定义，其内部成员有很多，重点掌握以下内容</p>
 <ul>
-<li>进程ID：<br>  系统中每个进程都有唯一的ID，在C语言中用pid_t类型表示，其实就是一个非负整数。pid_t是用typedef对某个数据类型做了重定义，后面的_t是就是typedef的意思</li>
+<li>进程ID：<br>  　　系统中每个进程都有唯一的ID，在C语言中用pid_t类型表示，其实就是一个非负整数。pid_t是用typedef对某个数据类型做了重定义，后面的_t是就是typedef的意思</li>
 <li>进程的状态：<ul>
 <li>有就绪，允许，运行，挂起，停止等状态</li>
 </ul>
 </li>
 <li>进程切换时需要保存和恢复的一些CPU寄存器</li>
-<li>描述虚拟地址空间的信息<pre><code>  在Linux下，每启动一个虚拟进程就对应一个虚拟地址空间，包含应用程序的所有信息，但是里面数据的实际计算是在物理内存里(cpu里的MMU会做一个虚拟内存到物理内存之间的映射)
+<li>描述虚拟地址空间的信息<pre><code>  　　在Linux下，每启动一个虚拟进程就对应一个虚拟地址空间，包含应用程序的所有信息，但是里面数据的实际计算是在物理内存里（cpu里的MMU会做一个虚拟内存到物理内存之间的映射）
 </code></pre></li>
-<li>描述控制终端的信息<pre><code>  ./a.out执行起来就变成一个进程，进程在运行时，依赖于终端，因为需要把数据输出到对应的终端上，所以进程会保存一些控制终端的信息
+<li>描述控制终端的信息<pre><code>  　　./a.out执行起来就变成一个进程，进程在运行时，依赖于终端，因为需要把数据输出到对应的终端上，所以进程会保存一些控制终端的信息
 </code></pre></li>
 <li>当前工作目录（Current Working Directory）<br>  当前进程是在哪个工作目录下工作的<pre class="line-numbers language-bash"><code class="language-bash">  <span class="token function">pwd</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -600,8 +612,8 @@
   <span class="token function">umask</span> 222
   <span class="token function">umask</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-  使用umask命令查看掩码，使用umask 222 改变进程掩码，在使用umask查看掩码，发现掩码改变为我们过设定的值。当再开启一个进程时，掩码为此进程下的掩码，与刚开始的进程下的修改的掩码不同，每一个进程之间是互不影响的</li>
-<li>文件描述符表，包含很多指向file结构体的指针<br>   文件描述符表在pcb里，其实可以看成一个大小为1024数组，对于任何一个进程来说，默认能打开的最多文件个数为1024个，把内核改一下，重新编译一下内核，就可以改变能打开的最多文件个数，不过不建议轻易改动内核，除非特殊需要</li>
+  　　使用umask命令查看掩码，使用umask 222 改变进程掩码，在使用umask查看掩码，发现掩码改变为我们过设定的值。当再开启一个进程时，掩码为此进程下的掩码，与刚开始的进程下的修改的掩码不同，每一个进程之间是互不影响的</li>
+<li>文件描述符表，包含很多指向file结构体的指针<br>   　　文件描述符表在pcb里，其实可以看成一个大小为1024数组，对于任何一个进程来说，默认能打开的最多文件个数为1024个，把内核改一下，重新编译一下内核，就可以改变能打开的最多文件个数，不过不建议轻易改动内核，除非特殊需要</li>
 <li>和信号相关的信息<br>   Linux下独有的</li>
 <li>用户ID和组ID<pre class="line-numbers language-bash"><code class="language-bash">  <span class="token function">stat</span> test.c
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -609,23 +621,89 @@
 <li>会话（Session）和进程组<br>   多个进程放在一起就是一个进程组，多个进程组组成的就是会话</li>
 <li>进程可以使用的资源上限（Resource Limit）    <pre class="line-numbers language-bash"><code class="language-bash">  <span class="token function">ulimit</span> -a
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-  输入 ulimit -a命令，可以看到进程里的资源，例如默认能打开的文件个数，管道里的缓存区，栈的默认缓存区大小，都在资源上限里看到，这些数据都是存在进程控制块里，</li>
+  　　输入 ulimit -a命令，可以看到进程里的资源，例如默认能打开的文件个数，管道里的缓存区，栈的默认缓存区大小，都在资源上限里看到，这些数据都是存在进程控制块里，</li>
 </ul>
 <h3 id="1-4进程的五种状态"><a href="#1-4进程的五种状态" class="headerlink" title="1.4进程的五种状态"></a>1.4进程的五种状态</h3><ul>
-<li>就绪态<br>  在终端下执行./a.out后，进程有了，它所对应的地址空间也有了，所处的状态为就绪态，有执行资格，没有执行权，多个进程分用cpu的时间碎片，在没有分到时间碎片时，处于就绪态</li>
+<li>就绪态<br>  　　　在终端下执行./a.out后，进程有了，它所对应的地址空间也有了，所处的状态为就绪态，有执行资格，没有执行权，多个进程分用cpu的时间碎片，在没有分到时间碎片时，处于就绪态</li>
 <li>运行态<br>  当抢到时间碎片后，处于运行态，所有的运行态都是从就绪态而来</li>
 <li><p>挂起态<br>  没有执行资格，没有执行权（例如运行sleep()函数后）</p>
-<p>  <img src="../../source/images/jincheng.png" alt="进程的五种状态"></p>
+<p>  <img src="../../images/jincheng.png" alt="进程的五种状态"></p>
 </li>
 </ul>
 <h2 id="2-进程控制"><a href="#2-进程控制" class="headerlink" title="2. 进程控制"></a>2. 进程控制</h2><pre><code>进程控制是讲如何创建子进程
-</code></pre><h3 id="fork函数"><a href="#fork函数" class="headerlink" title="fork函数"></a>fork函数</h3><p><img src="../../source/images/fork.png" alt="fork函数解析"></p>
-<p>fork函数创建子进程，子进程相当于父进程的拷贝，用户区数据一样，进程ID不同</p>
+</code></pre><h3 id="2-1fork函数"><a href="#2-1fork函数" class="headerlink" title="2.1fork函数"></a>2.1fork函数</h3><p><img src="../../images/fork.png" alt="fork函数解析"></p>
+<p>　　fork函数创建子进程，子进程相当于父进程的拷贝，用户区数据一样，进程ID不同<br>后续对父进程或子进程用户区数据做操作，互不影响，相互独立<br>　　父进程与子进程的数据在内存区读时共享，写时复制（当就修改的情况下），并且父子进程之间不能够使用全局变量进行通信，因为两个进程之间的内存不能共享</p>
 <ul>
 <li>fork函数有两个返回值<ul>
 <li>父进程返回子进程的PID</li>
 <li>子进程返回0</li>
 </ul>
+</li>
+<li>getpid函数<br>  得到当前进程的PID</li>
+<li>getppid函数<br>  得到当前进程的父进程的PID </li>
+</ul>
+<h4 id="2-1-1父子进程运行先后顺序不一定"><a href="#2-1-1父子进程运行先后顺序不一定" class="headerlink" title="2.1.1父子进程运行先后顺序不一定"></a>2.1.1父子进程运行先后顺序不一定</h4><ul>
+<li>通过让父进程sleep(1)来让子进程先运行<br><code>`</code>bash<br>#include &lt;unistd.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;sys/types.h&gt;<br>#include &lt;sys/stat.h&gt;<br>#include &lt;string.h&gt;</li>
+</ul>
+<p>int main(int argc, const char* argv[])<br>{<br>    pid_t pid = fork();</p>
+<pre><code>for(int i=0; i&lt;4; ++i)
+{
+    printf(&quot; i = %d\n&quot;, i);
+}
+
+// 父进程
+if(pid &gt; 0)
+{
+    printf(&quot;parent process, pid = %d, ppid = %d\n&quot;, getpid(), getppid());
+</code></pre><p>//        sleep(1);<br>    }<br>    // 子进程<br>    else if(pid == 0)<br>    {<br>        printf(“child process, pid = %d, ppid = %d\n”, getpid(), getppid());<br>    }</p>
+<pre><code>for(int i=0; i&lt;4; ++i)
+{
+    printf(&quot; i = %d\n&quot;, i);
+}
+
+return 0;
+</code></pre><p>}</p>
+<pre><code>　　sleep(1)的作用是让父进程停止一秒，让子进程运行，防止父进程先运行结束，在终端打印时，父进程先运行完后，终端判断从后台运行到前台，此时子进程还未运行结束会出现下面这种输出情况
+```bash
+执行./a.out
+i=0
+i=1
+i=2
+i=3
+parent process, ppid = 37157
+lsc@lsc123:~/test $ child process, pid =37258 , ppid = 37157
+i=0
+i=1
+i=2
+i=3
+</code></pre><p>正确输出为</p>
+<pre class="line-numbers language-bash"><code class="language-bash">执行./a.out
+i<span class="token operator">=</span>0
+i<span class="token operator">=</span>1
+i<span class="token operator">=</span>2
+i<span class="token operator">=</span>3
+parent process, ppid <span class="token operator">=</span> 37157
+child process, pid <span class="token operator">=</span>37258 , ppid <span class="token operator">=</span> 37157
+i<span class="token operator">=</span>0
+i<span class="token operator">=</span>1
+i<span class="token operator">=</span>2
+i<span class="token operator">=</span>3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-1-2验证f父子进程间是否共享全局变量"><a href="#2-1-2验证f父子进程间是否共享全局变量" class="headerlink" title="2.1.2验证f父子进程间是否共享全局变量"></a>2.1.2验证f父子进程间是否共享全局变量</h4><h3 id="2-2在终端下查看某个正在运行的进程"><a href="#2-2在终端下查看某个正在运行的进程" class="headerlink" title="2.2在终端下查看某个正在运行的进程"></a>2.2在终端下查看某个正在运行的进程</h3><ul>
+<li><p>查看进程</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> au
+<span class="token function">ps</span> aux
+<span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> myhello <span class="token punctuation">(</span>查看指定进程,经常使用<span class="token punctuation">)</span>
+<span class="token function">ps</span> ajx
+<span class="token function">ps</span> ajx <span class="token operator">|</span> <span class="token function">grep</span> myhello
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>ps ajx 命令查看进程，输出PPID是父进程，PID是子进程，PGID是进程组，SID是会话ID</p>
+</li>
+<li><p>杀死进程<br>kill 向指定的进程发送信号</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">kill</span> -l （查看LINUX操作系统下的64个信号）
+<span class="token function">kill</span> -9  38078 <span class="token punctuation">(</span>无条件杀死一个进程（PID是38078）,9相当于LINUX操作系统下<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>输入kill -9  38078命令是无条件杀死一个进程。<br>38078是PID,9相当于LINUX操作系统下的第9个信号SIGKILL</p>
 </li>
 </ul>
 
@@ -660,7 +738,7 @@
   <p><span>本文标题:</span><a href="/2019/03/24/Linux-3/">嵌入式Linux开发笔记 <三>  Linux进程</三></a></p>
   <p><span>文章作者:</span><a href="/" title="访问 半盏清酒 的个人博客">半盏清酒</a></p>
   <p><span>发布时间:</span>2019年03月24日 - 21:05</p>
-  <p><span>最后更新:</span>2019年03月24日 - 23:36</p>
+  <p><span>最后更新:</span>2019年03月25日 - 11:29</p>
   <p><span>原始链接:</span><a href="/2019/03/24/Linux-3/" title="嵌入式Linux开发笔记 <三>  Linux进程">https://lsc123.github.io/2019/03/24/Linux-3/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://lsc123.github.io/2019/03/24/Linux-3/" aria-label="复制成功！"></i></span>
   </p>
@@ -874,7 +952,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-进程相关概念"><span class="nav-number">1.</span> <span class="nav-text">1. 进程相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1程序和进程"><span class="nav-number">1.1.</span> <span class="nav-text">1.1程序和进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2并行和并发"><span class="nav-number">1.2.</span> <span class="nav-text">1.2并行和并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3进程控制块-PCB"><span class="nav-number">1.3.</span> <span class="nav-text">1.3进程控制块(PCB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4进程的五种状态"><span class="nav-number">1.4.</span> <span class="nav-text">1.4进程的五种状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-进程控制"><span class="nav-number">2.</span> <span class="nav-text">2. 进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fork函数"><span class="nav-number">2.1.</span> <span class="nav-text">fork函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-进程相关概念"><span class="nav-number">1.</span> <span class="nav-text">1. 进程相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1程序和进程"><span class="nav-number">1.1.</span> <span class="nav-text">1.1程序和进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2并行和并发"><span class="nav-number">1.2.</span> <span class="nav-text">1.2并行和并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3进程控制块-PCB"><span class="nav-number">1.3.</span> <span class="nav-text">1.3进程控制块(PCB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4进程的五种状态"><span class="nav-number">1.4.</span> <span class="nav-text">1.4进程的五种状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-进程控制"><span class="nav-number">2.</span> <span class="nav-text">2. 进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1fork函数"><span class="nav-number">2.1.</span> <span class="nav-text">2.1fork函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1父子进程运行先后顺序不一定"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1父子进程运行先后顺序不一定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2验证f父子进程间是否共享全局变量"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2验证f父子进程间是否共享全局变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2在终端下查看某个正在运行的进程"><span class="nav-number">2.2.</span> <span class="nav-text">2.2在终端下查看某个正在运行的进程</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -913,7 +991,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">6k</span>
   
 
   
@@ -922,7 +1000,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">4 分钟</span>
+    <span title="站点阅读时长">6 分钟</span>
   
 </div>
 
